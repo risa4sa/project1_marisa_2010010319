@@ -1,20 +1,42 @@
 package com.marisa.uangkas;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.marisa.uangkas.helper.SqliteHelper;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class MainActivity extends AppCompatActivity {
+
+    TextView text_masuk, text_keluar, Text_total;
+    ListView list_kas;
+    SwipeRefreshLayout swipe_refresh;
+    ArrayList<HashMap<String, String>> aruskas = new ArrayList<HashMap<String, String>>();
+
+    public static TextView text_filter;
+    public static String transaksi_id, tgl_dari, tgl_ke;
+    public static boolean filter;
+
+    String query_kas, query_total;
+    SqliteHelper sqliteHelper;
+    Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"halo guys apa kabar",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,AddActivity.class));
             }
         });
     }

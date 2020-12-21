@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.andexert.library.RippleView;
@@ -57,11 +58,11 @@ public class AddActivity extends AppCompatActivity {
         rip_simpan.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
             @Override
             public void onComplete(RippleView rippleView) {
-                if (status.equals("")||edit_jumlah.getText().toString().equals("")){
-                    Toast.makeText(getApplicationContext(), "Mohon, isi data dengan benar", Toast.LENGTH_LONG).show();
+                if (status.equals("") || edit_jumlah.getText().toString().equals("")){
+                    Toast.makeText(getApplicationContext(), "mohon isi data dengan benar", Toast.LENGTH_LONG).show();
                 }else {
                     SQLiteDatabase database = sqliteHelper.getWritableDatabase();
-                    database.execSQL("INSERT INTO transaksi(status, jumlah, keterangan)VALUE ('" +
+                    database.execSQL("INSERT INTO transaksi(status, jumlah, keterangan) VALUES ('" +
                             status+"','" +
                             edit_jumlah.getText().toString()+"','" +
                             edit_keterangan.getText().toString()+"')");
@@ -73,7 +74,7 @@ public class AddActivity extends AppCompatActivity {
         });
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("tamabah data");
+        getSupportActionBar().setTitle("tambah data");
     }
 
     @Override
